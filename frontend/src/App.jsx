@@ -33,7 +33,8 @@ import {
 } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
-const API_BASE = 'http://localhost:5000/api';
+// const API_BASE = 'http://localhost:5000/api';
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 // Predefined categories with icons and colors
 const PREDEFINED_CATEGORIES = [

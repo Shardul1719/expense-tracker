@@ -6,7 +6,7 @@ import authMiddleware from "./middleware/authMiddleware.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
 
 const app = express();
-
+app.use(express.json());
 //global middlewares
 app.use(cors());
 app.use(express.json());

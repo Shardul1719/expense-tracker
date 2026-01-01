@@ -19,6 +19,10 @@
 import dotenv from "dotenv";
 dotenv.config();
 import mysql from "mysql2/promise";
+console.log("MYSQL_HOST:", process.env.MYSQL_HOST);
+console.log("MYSQL_PORT:", process.env.MYSQL_PORT);
+console.log("MYSQL_USER:", process.env.MYSQL_USER);
+console.log("MYSQL_DATABASE:", process.env.MYSQL_DATABASE);
 
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST,

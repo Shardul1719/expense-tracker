@@ -7,7 +7,7 @@ import app from "./src/app.js";
 import cors from "cors";
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "https://expense-tracker-umber-one-31.vercel.app"],
   credentials: true
 }));
 

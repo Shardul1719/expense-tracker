@@ -941,7 +941,7 @@ const App = () => {
 
   const fetchExpenses = async (authToken) => {
     try {
-      const response = await fetch(`${API_BASE}/expenses`, {
+      const response = await fetch(`${API_BASE}/api/expenses`, {
         headers: {
           'Authorization': `Bearer ${authToken || token}`
         }
@@ -988,7 +988,7 @@ const App = () => {
     setLoading(true);
 
     try {
-      const endpoint = authMode === 'login' ? '/auth/login' : '/auth/register';
+      const endpoint = authMode === 'login' ? '/api/auth/login' : '/api/auth/register';
       const body = authMode === 'login' 
         ? { email: authForm.email, password: authForm.password }
         : authForm;

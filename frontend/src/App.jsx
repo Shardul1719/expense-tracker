@@ -33,8 +33,8 @@ import {
 } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
-// const API_BASE = 'http://localhost:5000/api';
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const API_BASE = 'http://localhost:5000';
+// const API_BASE = import.meta.env.VITE_API_BASE;
 
 // Predefined categories with icons and colors
 const PREDEFINED_CATEGORIES = [
@@ -52,64 +52,169 @@ const PREDEFINED_CATEGORIES = [
 
 // Hero Section Component (moved outside App)
 const HeroSection = ({ onGetStarted }) => (
-  <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-    <div className="max-w-6xl mx-auto px-4 py-12">
+  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    {/* Animated background elements */}
+    <div className="absolute inset-0 overflow-hidden">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-12"
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, 90, 0],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+        className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
+      />
+      <motion.div
+        animate={{
+          scale: [1.2, 1, 1.2],
+          rotate: [90, 0, 90],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+        className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-pink-500/20 to-cyan-500/20 rounded-full blur-3xl"
+      />
+    </div>
+
+    <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12">
+      {/* Animated Logo/Icon */}
+      <motion.div
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ type: "spring", duration: 1.5, bounce: 0.5 }}
+        className="mb-12"
       >
-        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-          Track Your Expenses<br />
-          <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Take Control of Your Finances
+        <div className="relative">
+          {/* Gradient shapes */}
+          <motion.div
+            animate={{
+              y: [0, -20, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute -top-8 -left-8 w-32 h-32 bg-gradient-to-br from-yellow-400 to-pink-500 rounded-full blur-xl opacity-60"
+          />
+          <motion.div
+            animate={{
+              y: [0, 20, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute -bottom-8 -right-8 w-40 h-40 bg-gradient-to-tr from-cyan-400 to-purple-500 rounded-3xl blur-xl opacity-60"
+          />
+          
+          {/* Main icon */}
+          <div className="relative bg-gradient-to-br from-emerald-400 via-cyan-400 to-purple-500 p-1 rounded-3xl">
+            <div className="bg-slate-900 p-8 rounded-3xl">
+              <PiggyBank className="w-24 h-24 text-white" />
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Main content */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="text-center max-w-2xl"
+      >
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+        >
+          <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            Track & Control
           </span>
-        </h1>
-        <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-          Easily record and categorize your daily spending. Get insights with beautiful charts and reports.
-        </p>
+          <br />
+          <span className="text-white">Your Money</span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed"
+        >
+          Organize and track your expenses in one place.<br />
+          Smart insights. Beautiful design. Complete control.
+        </motion.p>
+
+        {/* CTA Button */}
         <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.9 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={onGetStarted}
-          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg"
+          className="group relative overflow-hidden"
         >
-          Get Started Free
+          {/* Animated gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-500 rounded-2xl" />
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-emerald-400 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          
+          {/* Button content */}
+          <div className="relative bg-gradient-to-br from-white to-gray-50 text-gray-900 px-10 py-4 rounded-2xl m-0.5 font-bold text-lg flex items-center gap-4 shadow-2xl">
+            <span className="tracking-wide">Get Started</span>
+            <motion.div
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="flex items-center"
+            >
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 flex items-center justify-center shadow-lg">
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2.5"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </div>
+            </motion.div>
+          </div>
         </motion.button>
       </motion.div>
 
+      {/* Feature pills */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="bg-white rounded-3xl shadow-2xl overflow-hidden"
+        transition={{ delay: 1.1 }}
+        className="flex flex-wrap gap-4 justify-center mt-16 max-w-2xl"
       >
-        <img 
-          src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=600&fit=crop" 
-          alt="Expense tracking" 
-          className="w-full h-64 md:h-96 object-cover"
-        />
-      </motion.div>
-
-      <div className="grid md:grid-cols-3 gap-8 mt-16">
         {[
-          { icon: BarChart3, title: 'Visual Insights', desc: 'Beautiful charts showing your spending patterns' },
-          { icon: Grid3x3, title: 'Easy Categories', desc: 'Organize expenses with customizable categories' },
-          { icon: Shield, title: 'Secure & Private', desc: 'Your financial data is encrypted and safe' }
-        ].map((feature, i) => (
+          { icon: BarChart3, text: 'Smart Analytics' },
+          { icon: Shield, text: 'Secure & Private' },
+          { icon: Zap, text: 'Lightning Fast' }
+        ].map((item, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 + i * 0.1 }}
-            className="bg-white p-6 rounded-2xl shadow-lg text-center"
+            whileHover={{ scale: 1.05, y: -5 }}
+            className="flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-full text-white"
           >
-            <feature.icon className="w-12 h-12 mx-auto mb-4 text-blue-600" />
-            <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-            <p className="text-gray-600">{feature.desc}</p>
+            <item.icon className="w-5 h-5" />
+            <span className="font-medium">{item.text}</span>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   </div>
 );
@@ -921,17 +1026,34 @@ const App = () => {
   const [incomeInput, setIncomeInput] = useState('');
 
   useEffect(() => {
-    const savedToken = localStorage.getItem('token');
-    const savedUser = localStorage.getItem('user');
-    const savedIncome = localStorage.getItem('userIncome');
-    if (savedToken && savedUser) {
-      setToken(savedToken);
-      setUser(JSON.parse(savedUser));
-      setUserIncome(parseFloat(savedIncome) || 0);
-      fetchExpenses(savedToken);
-      setCurrentView('home');
-    }
-  }, []);
+  const savedToken = localStorage.getItem('token');
+  const savedUser = localStorage.getItem('user');
+  const savedIncome = localStorage.getItem('userIncome');
+  if (savedToken && savedUser) {
+    setToken(savedToken);
+    setUser(JSON.parse(savedUser));
+    setUserIncome(parseFloat(savedIncome) || 0);
+    fetchExpenses(savedToken);
+    setCurrentView('home');
+  }
+}, []);
+
+useEffect(() => {
+  if (expenses.length > 0) {
+    calculateCategories();
+  }
+}, [expenses]);
+
+// ADD THIS NEW useEffect
+useEffect(() => {
+  // Initialize categories with predefined categories on mount
+  if (categories.length === 0) {
+    setCategories(PREDEFINED_CATEGORIES.map(cat => ({
+      ...cat,
+      total: 0
+    })));
+  }
+}, []);
 
   useEffect(() => {
     if (expenses.length > 0) {
@@ -954,34 +1076,48 @@ const App = () => {
   };
 
   const calculateCategories = () => {
-    const categoryTotals = {};
-    
-    expenses.forEach(expense => {
-      const cat = expense.category || 'Uncategorized';
-      if (!categoryTotals[cat]) {
-        categoryTotals[cat] = 0;
-      }
-      categoryTotals[cat] += parseFloat(expense.amount);
-    });
+  const categoryTotals = {};
+  
+  // Calculate totals from expenses
+  expenses.forEach(expense => {
+    const cat = expense.category || 'Uncategorized';
+    if (!categoryTotals[cat]) {
+      categoryTotals[cat] = 0;
+    }
+    categoryTotals[cat] += parseFloat(expense.amount);
+  });
 
-    const categoriesData = PREDEFINED_CATEGORIES.map(predefCat => ({
-      ...predefCat,
-      total: categoryTotals[predefCat.name] || 0
-    }));
+  // Always show predefined categories with their totals (0 if no expenses)
+  const categoriesData = PREDEFINED_CATEGORIES.map(predefCat => ({
+    ...predefCat,
+    total: categoryTotals[predefCat.name] || 0
+  }));
 
-    Object.keys(categoryTotals).forEach(catName => {
-      if (!PREDEFINED_CATEGORIES.find(pc => pc.name === catName)) {
-        categoriesData.push({
-          name: catName,
-          icon: Briefcase,
-          color: 'bg-gray-100 text-gray-600',
-          total: categoryTotals[catName]
-        });
-      }
-    });
+  // Add custom categories from expenses
+  Object.keys(categoryTotals).forEach(catName => {
+    if (!PREDEFINED_CATEGORIES.find(pc => pc.name === catName)) {
+      categoriesData.push({
+        name: catName,
+        icon: Briefcase,
+        color: 'bg-gray-100 text-gray-600',
+        total: categoryTotals[catName]
+      });
+    }
+  });
 
-    setCategories(categoriesData);
-  };
+  // Add any custom categories that were created but have no expenses yet
+  const existingCategoryNames = categoriesData.map(c => c.name);
+  categories.forEach(existingCat => {
+    if (!existingCategoryNames.includes(existingCat.name)) {
+      categoriesData.push({
+        ...existingCat,
+        total: 0
+      });
+    }
+  });
+
+  setCategories(categoriesData);
+};
 
   const handleAuth = async (e) => {
     e.preventDefault();
